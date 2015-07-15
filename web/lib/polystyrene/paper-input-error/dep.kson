@@ -1,0 +1,3 @@
+{
+  depends: [ polymer paper-styles paper-input-addon-behavior ]
+}

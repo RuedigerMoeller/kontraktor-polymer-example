@@ -1,0 +1,25 @@
+<dom-module id="paper-icon-item"> 
+ <link rel="import" type="css" href="paper-item-shared.css"> 
+ <style>
+
+    :host {
+      @apply(--layout-horizontal);
+      @apply(--layout-center);
+      @apply(--paper-font-subhead);
+
+      @apply(--paper-item);
+      @apply(--paper-icon-item);
+    }
+
+    .content-icon {
+      width: var(--paper-item-icon-width, 56px);
+    }
+
+  </style> 
+ <template> 
+  <div id="contentIcon" class="content-icon layout horizontal center"> 
+   <content select="[item-icon]"></content> 
+  </div> 
+  <content></content> 
+ </template> 
+</dom-module>

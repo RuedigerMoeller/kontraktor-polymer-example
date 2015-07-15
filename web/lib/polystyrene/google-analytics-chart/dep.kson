@@ -1,0 +1,3 @@
+{
+  depends: [ polymer google-chart promise-polyfill-lite google-analytics-query google-analytics-loader ]
+}

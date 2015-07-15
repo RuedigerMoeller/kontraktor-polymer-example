@@ -1,0 +1,23 @@
+<dom-module id="google-map"> 
+ <style>
+    :host {
+      position: relative;
+      display: block;
+      height: 100%;
+    }
+
+    #map {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+    }
+
+  </style> 
+ <template> 
+  <google-maps-api api-key="[[apiKey]]" client-id="[[clientId]]" version="[[version]]" libraries="[[libraries]]" signed-in="[[signedIn]]" language="[[language]]" on-api-load="_mapApiLoaded"></google-maps-api> 
+  <div id="map"></div> 
+  <content id="markers" select="google-map-marker"></content> 
+ </template> 
+</dom-module>

@@ -1,0 +1,3 @@
+{
+  depends: [ polymer iron-jsonp-library ]
+}

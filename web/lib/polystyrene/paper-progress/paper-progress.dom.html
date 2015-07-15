@@ -1,0 +1,87 @@
+<dom-module id="paper-progress"> 
+ <style>
+    :host {
+      display: inline-block;
+      width: 200px;
+      height: 4px;
+    }
+
+    :host(.transiting) #activeProgress,
+    :host(.transiting) #secondaryProgress {
+      -webkit-transition-property: -webkit-transform;
+      transition-property: transform;
+
+      /* Duration */
+      -webkit-transition-duration: var(--paper-progress-transition-duration, 0.08s);
+      transition-duration: var(--paper-progress-transition-duration, 0.08s);
+
+      /* Timing function */
+      -webkit-transition-timing-function: var(--paper-progress-transition-timing-function, ease);
+      transition-timing-function: var(--paper-progress-transition-timing-function, ease);
+
+      /* Delay */
+      -webkit-transition-delay: var(--paper-progress-transition-delay, 0s);
+      transition-delay: var(--paper-progress-transition-delay, 0s);
+    }
+
+    #progressContainer {
+      position: relative;
+      height: 100%;
+      background-color: var(--paper-progress-container-color, --google-grey-300);
+      overflow: hidden;
+    }
+
+    #activeProgress,
+    #secondaryProgress {
+      -webkit-transform-origin: left center;
+      transform-origin: left center;
+      -webkit-transform: scaleX(0);
+      transform: scaleX(0);
+    }
+
+    #activeProgress {
+      background-color: var(--paper-progress-active-color, --google-green-500);
+    }
+
+    #secondaryProgress {
+      background-color: var(--paper-progress-secondary-color, --google-green-100);
+    }
+
+    #activeProgress.indeterminate {
+      -webkit-transform-origin: center center;
+      transform-origin: center center;
+      -webkit-animation: indeterminate-bar 1s linear infinite;
+      animation: indeterminate-bar 1s linear infinite;
+    }
+
+    @-webkit-keyframes indeterminate-bar {
+      0% {
+        -webkit-transform: translate(-50%) scaleX(0);
+      }
+      50% {
+        -webkit-transform: translate(0%) scaleX(0.3);
+      }
+      100% {
+        -webkit-transform: translate(50%) scaleX(0);
+      }
+    }
+
+    @keyframes indeterminate-bar {
+      0% {
+        transform: translate(-50%) scaleX(0);
+      }
+      50% {
+        transform: translate(0%) scaleX(0.3);
+      }
+      100% {
+        transform: translate(50%) scaleX(0);
+      }
+    }
+  </style> 
+ <template> 
+  <div id="progressContainer" role="progressbar" aria-valuenow$="{{value}}" aria-valuemin$="{{min}}" aria-valuemax$="{{max}}"> 
+   <div id="secondaryProgress" class="fit"></div> 
+   <div id="activeProgress" class="fit"></div> 
+  </div> 
+ </template> 
+</dom-module>

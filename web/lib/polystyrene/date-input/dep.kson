@@ -1,0 +1,3 @@
+{
+  depends: [ polymer iron-input iron-flex-layout iron-validatable-behavior date-validator ]
+}

@@ -1,0 +1,10 @@
+<dom-module id="google-map-directions"> 
+ <style>
+    :host {
+      display: none;
+    }
+  </style> 
+ <template> 
+  <google-maps-api api-key="[[apiKey]]" libraries="[[libraries]]" language="[[language]]" on-api-load="_mapApiLoaded"></google-maps-api> 
+ </template> 
+</dom-module>

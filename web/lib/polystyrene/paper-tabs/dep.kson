@@ -1,0 +1,3 @@
+{
+  depends: [ polymer iron-flex-layout iron-flex-layout iron-resizable-behavior iron-menubar-behavior iron-icon paper-icon-button color paper-tabs-icons paper-tab ]
+}

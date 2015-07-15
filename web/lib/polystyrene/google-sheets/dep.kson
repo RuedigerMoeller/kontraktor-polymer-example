@@ -1,0 +1,3 @@
+{
+  depends: [ polymer iron-ajax google-signin-aware ]
+}

@@ -1,0 +1,3 @@
+{
+  depends: [ polymer promise-polyfill-lite ]
+}

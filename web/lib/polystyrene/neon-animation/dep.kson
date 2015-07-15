@@ -1,0 +1,3 @@
+{
+  depends: [ neon-animatable-behavior neon-animated-pages neon-animatable neon-animation-behavior neon-animation-runner-behavior neon-animations neon-shared-element-animatable-behavior neon-shared-element-animation-behavior ]
+}

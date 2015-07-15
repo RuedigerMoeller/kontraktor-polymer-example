@@ -1,0 +1,3 @@
+{
+  depends: [ iron-flex-layout typography shadow ]
+}

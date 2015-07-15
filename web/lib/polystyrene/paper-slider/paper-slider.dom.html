@@ -1,0 +1,26 @@
+<dom-module id="paper-slider"> 
+ <link rel="import" type="css" href="paper-slider.css"> 
+ <template> 
+  <div id="sliderContainer" class$="[[_getClassNames(disabled, pin, snaps, immediateValue, min, expand, dragging, transiting, editable)]]"> 
+   <div class="bar-container"> 
+    <paper-progress id="sliderBar" aria-hidden="true" min="[[min]]" max="[[max]]" step="[[step]]" value="[[immediateValue]]" secondary-progress="[[secondaryProgress]]" on-down="_bardown" on-up="_resetKnob" on-track="_onTrack"> 
+    </paper-progress> 
+   </div> 
+   <template is="dom-if" if="[[snaps]]"> 
+    <div class="slider-markers horizontal layout"> 
+     <template is="dom-repeat" items="[[markers]]"> 
+      <div class="slider-marker flex"></div> 
+     </template> 
+    </div> 
+   </template> 
+   <div id="sliderKnob" class="center-justified center horizontal layout" on-down="_knobdown" on-up="_resetKnob" on-track="_onTrack" on-transitionend="_knobTransitionEnd"> 
+    <paper-ripple id="ink" class="circle" center="" hidden$="[[!receivedFocusFromKeyboard]]"></paper-ripple> 
+    <div id="sliderKnobInner" value$="[[immediateValue]]"></div> 
+   </div> 
+  </div> 
+  <template is="dom-if" if="[[editable]]"> 
+   <paper-input id="input" class="slider-input" disabled$="[[disabled]]" on-change="_inputChange"> 
+   </paper-input> 
+  </template> 
+ </template> 
+</dom-module>

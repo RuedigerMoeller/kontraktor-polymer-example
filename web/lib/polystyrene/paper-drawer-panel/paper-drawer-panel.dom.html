@@ -1,0 +1,16 @@
+<dom-module id="paper-drawer-panel"> 
+ <link rel="import" type="css" href="paper-drawer-panel.css"> 
+ <template> 
+  <iron-media-query id="mq" on-query-matches-changed="_onQueryMatchesChanged" query="[[_computeMediaQuery(forceNarrow, responsiveWidth)]]"> 
+  </iron-media-query> 
+  <iron-selector attr-for-selected="id" class$="[[_computeIronSelectorClass(narrow, transition, dragging, rightDrawer, peeking)]]" activate-event="" selected="[[selected]]"> 
+   <div id="main" style$="[[_computeMainStyle(narrow, rightDrawer, drawerWidth)]]"> 
+    <content select="[main]"></content> 
+    <div id="scrim" on-tap="closeDrawer"></div> 
+   </div> 
+   <div id="drawer" style$="[[_computeDrawerStyle(drawerWidth)]]"> 
+    <content select="[drawer]"></content> 
+   </div> 
+  </iron-selector> 
+ </template> 
+</dom-module>

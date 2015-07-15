@@ -1,0 +1,52 @@
+<dom-module id="paper-menu"> 
+ <style>
+
+    :host {
+      display: block;
+      padding: 8px 0;
+
+      background: var(--paper-menu-background-color, --primary-background-color);
+      color: var(--paper-menu-color, --primary-text-color);
+
+      @apply(--paper-menu);
+    }
+
+    /* need a wrapper element to make this higher specificity than the :host rule in paper-item */
+    .content > ::content > .iron-selected {
+      font-weight: bold;
+
+      @apply(--paper-menu-selected-item);
+    }
+
+    .content > ::content > [disabled] {
+      color: var(--paper-menu-disabled-color, --disabled-text-color);
+    }
+
+    .content > ::content > *:focus {
+      position: relative;
+      outline: 0;
+
+      @apply(--paper-menu-focused-item);
+    }
+
+    .content > ::content > *:focus:after {
+      @apply(--layout-fit);
+      background: currentColor;
+      /* FIXME move to paper-styles for next widget */
+      opacity: 0.12;
+      content: '';
+
+      @apply(--paper-menu-focused-item-after);
+    }
+
+    .content > ::content > *[colored]:focus:after {
+      opacity: 0.26;
+    }
+
+  </style> 
+ <template> 
+  <div class="content"> 
+   <content></content> 
+  </div> 
+ </template> 
+</dom-module>

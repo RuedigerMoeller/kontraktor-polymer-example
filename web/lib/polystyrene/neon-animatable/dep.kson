@@ -1,0 +1,3 @@
+{
+  depends: [ polymer neon-animatable-behavior ]
+}

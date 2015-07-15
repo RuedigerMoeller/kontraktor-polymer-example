@@ -1,0 +1,3 @@
+{
+  depends: [ polymer cascaded-animation fade-in-animation fade-out-animation hero-animation opaque-animation ripple-animation reverse-ripple-animation scale-down-animation scale-up-animation slide-from-left-animation slide-from-right-animation slide-left-animation slide-right-animation slide-up-animation slide-down-animation transform-animation ]
+}

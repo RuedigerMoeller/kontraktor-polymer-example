@@ -1,0 +1,15 @@
+<dom-module id="google-analytics-view-selector"> 
+ <style>
+    select {
+      color: inherit;
+      font: inherit;
+      margin: 0;
+    }
+  </style> 
+ <template> 
+  <google-analytics-loader all-ready="{{setupReady}}"></google-analytics-loader> 
+  <span class="control"> <label for="account">Account</label> <select id="account" on-change="updateAccount" value="{{account.id}}">  <option value="{{item.id}}">{{item.name}}</option>  </select> </span> 
+  <span class="control"> <label>Property</label> <select id="property" on-change="updateProperty" value="{{property.id}}">  <option value="{{item.id}}">{{item.name}}</option>  </select> </span> 
+  <span class="control"> <label>View</label> <select id="view" on-change="updateView" value="{{view.id}}">  <option value="{{item.id}}">{{item.name}}</option>  </select> </span> 
+ </template> 
+</dom-module>

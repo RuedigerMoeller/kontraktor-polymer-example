@@ -1,0 +1,21 @@
+<dom-module id="iron-collapse"> 
+ <style>
+
+    :host {
+      display: block;
+      transition-duration: 300ms;
+    }
+
+    :host(.iron-collapse-closed) {
+      display: none;
+    }
+
+    :host(:not(.iron-collapse-opened)) {
+      overflow: hidden;
+    }
+
+  </style> 
+ <template> 
+  <content></content> 
+ </template> 
+</dom-module>

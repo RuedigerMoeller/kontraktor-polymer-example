@@ -1,0 +1,3 @@
+{
+  depends: [ polymer color iron-flex-layout ]
+}

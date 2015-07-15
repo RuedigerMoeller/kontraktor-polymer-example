@@ -1,0 +1,3 @@
+{
+  depends: [ polymer paper-styles paper-progress paper-input paper-inky-focus-behavior paper-ripple iron-a11y-keys-behavior iron-range-behavior iron-form-element-behavior ]
+}

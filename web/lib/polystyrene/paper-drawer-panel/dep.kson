@@ -1,0 +1,3 @@
+{
+  depends: [ polymer iron-media-query iron-selector ]
+}

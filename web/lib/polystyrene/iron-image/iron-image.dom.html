@@ -1,0 +1,30 @@
+<dom-module id="iron-image"> 
+ <style>
+
+    :host {
+      display: inline-block;
+      overflow: hidden;
+      position: relative;
+    }
+
+    :host([sizing]) #img {
+      display: none;
+    }
+
+    #placeholder {
+      background-color: inherit;
+      opacity: 1;
+    }
+
+    #placeholder.faded-out {
+      transition: opacity 0.5s linear;
+      opacity: 0;
+    }
+
+  </style> 
+ <template> 
+  <img id="img" role="none" hidden$="[[_computeImageVisibility(sizing)]]"> 
+  <div id="placeholder" hidden$="[[_computePlaceholderVisibility(fade,loaded,preload)]]" class$="[[_computePlaceholderClassName(fade,loaded,preload)]]"></div> 
+  <content></content> 
+ </template> 
+</dom-module>

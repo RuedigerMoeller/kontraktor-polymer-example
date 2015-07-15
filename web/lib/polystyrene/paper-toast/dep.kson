@@ -1,0 +1,3 @@
+{
+  depends: [ polymer typography iron-a11y-announcer ]
+}

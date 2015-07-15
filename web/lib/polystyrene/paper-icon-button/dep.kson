@@ -1,0 +1,3 @@
+{
+  depends: [ polymer iron-icon iron-flex-layout default-theme paper-button-behavior paper-inky-focus-behavior paper-ripple ]
+}

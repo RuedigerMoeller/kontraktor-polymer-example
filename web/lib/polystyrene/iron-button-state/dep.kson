@@ -1,0 +1,3 @@
+{
+  depends: [ polymer iron-a11y-keys-behavior iron-control-state ]
+}

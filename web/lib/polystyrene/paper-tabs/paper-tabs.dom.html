@@ -1,0 +1,97 @@
+<dom-module id="paper-tabs"> 
+ <style>
+
+    :host {
+      @apply(--layout);
+      @apply(--layout-center);
+
+      height: 48px;
+      font-size: 14px;
+      font-weight: 500;
+      overflow: hidden;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      -webkit-tap-highlight-color: rgba(0,0,0,0);
+
+      @apply(--paper-tabs);
+    }
+
+    #tabsContainer {
+      position: relative;
+      height: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    #tabsContent {
+      height: 100%;
+    }
+
+    #tabsContent.scrollable {
+      position: absolute;
+      white-space: nowrap;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .not-visible {
+      opacity: 0;
+    }
+
+    paper-icon-button {
+      width: 24px;
+      padding: 16px;
+    }
+
+    #selectionBar {
+      position: absolute;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: var(--paper-tabs-selection-bar-color, --paper-yellow-a100);
+      -webkit-transform-origin: left center;
+      transform-origin: left center;
+      -webkit-transform: scale(0);
+      transform: scale(0);
+      transition: -webkit-transform;
+      transition: transform;
+
+      @apply(--paper-tabs-selection-bar);
+    }
+
+    #selectionBar.align-bottom {
+      top: 0;
+      bottom: auto;
+    }
+
+    #selectionBar.expand {
+      transition-duration: 0.15s;
+      transition-timing-function: cubic-bezier(0.4, 0.0, 1, 1);
+    }
+
+    #selectionBar.contract {
+      transition-duration: 0.18s;
+      transition-timing-function: cubic-bezier(0.0, 0.0, 0.2, 1);
+    }
+
+    #tabsContent > ::content > *:not(#selectionBar) {
+      height: 100%;
+    }
+
+  </style> 
+ <template> 
+  <paper-icon-button icon="paper-tabs:chevron-left" class$="[[_computeScrollButtonClass(_leftHidden, scrollable, hideScrollButtons)]]" on-up="_onScrollButtonUp" on-down="_onLeftScrollButtonDown"></paper-icon-button> 
+  <div id="tabsContainer" class="flex" on-scroll="_scroll"> 
+   <div id="tabsContent" class$="[[_computeTabsContentClass(scrollable)]]"> 
+    <content select="*"></content> 
+    <div id="selectionBar" class$="[[_computeSelectionBarClass(noBar, alignBottom)]]" on-transitionend="_onBarTransitionEnd"></div> 
+   </div> 
+  </div> 
+  <paper-icon-button icon="paper-tabs:chevron-right" class$="[[_computeScrollButtonClass(_rightHidden, scrollable, hideScrollButtons)]]" on-up="_onScrollButtonUp" on-down="_onRightScrollButtonDown"></paper-icon-button> 
+ </template> 
+</dom-module>

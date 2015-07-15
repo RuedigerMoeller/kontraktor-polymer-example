@@ -1,0 +1,3 @@
+{
+  depends: [ iron-icon iron-iconset-svg ]
+}
