@@ -1,10 +1,14 @@
-<dom-module is="google-analytics-chart"> 
+<dom-module name="paper-radio-group"> 
+ <style>
+    :host {
+      display: inline-block;
+    }
+
+    :host ::content > * {
+      padding: 12px;
+    }
+  </style> 
  <template> 
-  <google-analytics-loader all-ready="{{setupReady}}"></google-analytics-loader> 
-  <google-analytics-query id="query" loading="{{loading}}" get-data-response-handler="{{_boundResponseHandler}}" data="{{data}}" ids="{{ids}}" start-date="{{startDate}}" end-date="{{endDate}}" metrics="{{metrics}}" dimensions="{{dimensions}}" sort="{{sort}}" filters="{{filters}}" segment="{{segment}}" sampling-level="{{samplingLevel}}" start-index="{{startIndex}}" max-results="{{maxResults}}" output="dataTable" src-param="gwc-ga-chart"></google-analytics-query> 
-  <content select="header,h1,h2,h3,h4,h5,h6"></content> 
-  <google-chart id="chart" type="{{type}}" width="{{width}}" height="{{height}}" data="{{data.dataTable}}"> 
-  </google-chart> 
-  <content select="footer"></content> 
+  <content id="items" select="*"></content> 
  </template> 
 </dom-module>
