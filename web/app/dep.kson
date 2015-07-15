@@ -1,2 +1,2 @@
 { depends: [ js4k ] }
-#{ depends: [ js4k polymer ] }
+# { depends: [ js4k polymer ] } this app uses html import for polymer dependencies, only app components are loaded via http4k dependencies
