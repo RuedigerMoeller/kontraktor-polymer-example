@@ -31,16 +31,7 @@ public class Polymerization {
         String compName = htmlFile.getName().substring(0, htmlFile.getName().length() - ".html".length());
 
         Document doc = Jsoup.parse(htmlFile, "UTF-8", baseUrl);
-        List<Node> comments = new ArrayList<>();
-        doc.getAllElements().forEach( elem -> {
-            elem.childNodes().forEach( child -> {
-                if ( child instanceof Comment ) {
-                    comments.add(child);
-                }
-            });
-        });
-
-        comments.forEach( node -> node.remove() );
+        stripComments(doc);
 
         // dom modules
         Elements domModules = doc.getElementsByTag("dom-module");
@@ -101,6 +92,18 @@ public class Polymerization {
         } else {
             System.out.println("SUCCESSFULLY TRANSFORMED "+htmlFile.getName());
         }
+    }
+
+    public void stripComments(Document doc) {List<Node> comments = new ArrayList<>();
+        doc.getAllElements().forEach( elem -> {
+            elem.childNodes().forEach( child -> {
+                if ( child instanceof Comment) {
+                    comments.add(child);
+                }
+            });
+        });
+
+        comments.forEach( node -> node.remove() );
     }
 
     private void writeKson(File base, String compName, Elements links) throws FileNotFoundException {
