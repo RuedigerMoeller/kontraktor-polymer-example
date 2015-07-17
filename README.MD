@@ -1,1 +1,1 @@
-experimental, probably won't work and/or requires dev build of kontraktor
+experimental server side shim for html imports
