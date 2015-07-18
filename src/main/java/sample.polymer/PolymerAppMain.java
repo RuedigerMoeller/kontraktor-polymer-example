@@ -27,23 +27,34 @@ public class PolymerAppMain {
         PolymerApp app = AsActor(PolymerApp.class);
 
         Http4K.Build("localhost", 8080)
-            .fileRoot( "/", root)
-            .httpAPI(  "/api", app)
+//            .fileRoot( "/", root)
+            .resourcePath("/")
+                .resourcePath(
+                    "./web",
+                    "./bower_components",
+                    "./web/lib",
+                    "../../modules/kontraktor-http/src/main/javascript"
+                 )
+                .imports()
+                    .minify(false)
+                    .build()
+                .build()
+            .httpAPI("/api", app)
                 .serType(SerializerType.JsonNoRef)
                 .setSessionTimeout(30_000)
                 .build()
-            .websocket("ws", app )
+            .websocket("ws", app)
                 .serType(SerializerType.JsonNoRef)
                 .build()
-            .resourcePath( "/dyn" )
-                .rootComponent("app")
-                .resourcePath(
-                    "./web",
-                    "./web/lib",
-                    "../../modules/kontraktor-http/src/main/javascript",
-                    "./bower_components")
-                .devMode(true)
-                .build()
+//            .resourcePath( "/dyn" )
+//                .rootComponent("app")
+//                .resourcePath(
+//                     "./web",
+//                     "./web/lib",
+//                     "../../modules/kontraktor-http/src/main/javascript",
+//                     "./bower_components")
+//                .devMode(true)
+//                .build()
             .build();
     }
 
