@@ -17,13 +17,14 @@
 
   <link rel="import" href="paper-slider/paper-slider.html">
   <link rel="import" href="marked-element/marked-element.html">
+  <link rel="import" href="flip-clock/flip-clock.html">
+  <link rel="import" href="google-chart/google-chart.html">
 
   <!-- load my polymer components-->
   <link rel="import" href="app/my-comp.dom.html">
   <link rel="import" href="app/x-foo.dom.html">
 
   <script src="js4k/js4k.js"></script>
-
   <script src="app/app.js"></script>
 
 
@@ -31,32 +32,37 @@
 
 <body>
 
-<marked-element>
+<flip-clock></flip-clock>
 
-<script type="text/markdown">
-#This is
+      <my-comp></my-comp>
+      <x-foo></x-foo>
+      <my-comp user="POKPOK"></my-comp>
+      <marked-element>
 
-some markdown
+      <script type="text/markdown">
+      #This is
 
-* first
-* second
+      some markdown
 
-Seems to **work** *well*
-</script>
+      * first
+      * second
 
-</marked-element>
+      Seems to **work** *well*
+      </script>
 
-<br><br>
+      </marked-element>
 
-<paper-slider min="10" max="200" value="110" pin="true" style="width: 500px;"></paper-slider>
+      <br><br>
 
-<br><br>
+      <paper-slider min="10" max="200" value="110" pin="true" style="width: 500px;"></paper-slider>
 
-<my-comp></my-comp>
-<br><br>
-<x-foo></x-foo>
-<br><br>
-<my-comp user="POKPOK"></my-comp>
+
+      <google-chart
+        type='pie'
+        options='{"title": "Distribution of days in 2001Q1"}'
+        cols='[{"label":"Month", "type":"string"}, {"label":"Days", "type":"number"}]'
+        rows='[["Jan", 31],["Feb", 28],["Mar", 31]]'>
+      </google-chart>
 
 </body>
 </html>

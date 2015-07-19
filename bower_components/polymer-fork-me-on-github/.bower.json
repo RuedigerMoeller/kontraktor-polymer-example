@@ -1,0 +1,29 @@
+{
+  "name": "fork-me-on-github",
+  "description": "A Custom Element for the Fork Me On Github ribbons",
+  "license": "MIT",
+  "main": "fork-me-on-github.html",
+  "keywords": [
+    "polymer",
+    "web-components"
+  ],
+  "ignore": [
+    "**/.*",
+    "bower_components"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.0.0",
+    "github-fork-ribbon-css": "~0.1.1"
+  },
+  "homepage": "https://github.com/tcyrus/fork-me-on-github",
+  "_release": "61838a9d21",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "61838a9d2111a2f59a2cee9d895a0d644264e1d8"
+  },
+  "_source": "git://github.com/tcyrus/fork-me-on-github.git",
+  "_target": "*",
+  "_originalSource": "polymer-fork-me-on-github",
+  "_direct": true
+}

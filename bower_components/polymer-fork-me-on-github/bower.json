@@ -1,0 +1,19 @@
+{
+    "name": "fork-me-on-github",
+    "version": "0.0.0",
+    "description": "A Custom Element for the Fork Me On Github ribbons",
+    "license": "MIT",
+    "main": "fork-me-on-github.html",
+    "keywords": [
+        "polymer",
+        "web-components"
+    ],
+    "ignore": [
+        "**/.*",
+        "bower_components"
+    ],
+    "dependencies": {
+        "polymer": "Polymer/polymer#^1.0.0",
+        "github-fork-ribbon-css": "~0.1.1"
+    }
+}

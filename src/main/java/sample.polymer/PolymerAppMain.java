@@ -26,7 +26,7 @@ public class PolymerAppMain {
         // create server actor
         PolymerApp app = AsActor(PolymerApp.class);
 
-        boolean DEV = true;
+        boolean DEV = false;
         Http4K.Build("localhost", 8080)
 //            .fileRoot( "/", root)
             .resourcePath("/")
@@ -35,11 +35,11 @@ public class PolymerAppMain {
                      "./bower_components/",
                      "../kontraktor/modules/kontraktor-http/src/main/javascript"
                 )
-                .inlineCss(DEV)
-                .inlineScripts(DEV)
-                .minify(DEV)
-                .stripComments(DEV)
-                .inlineHtml(DEV)
+                .inlineCss(!DEV)
+                .inlineScripts(!DEV)
+                .minify(!DEV)
+                .stripComments(!DEV)
+                .inlineHtml(!DEV)
                 .cacheAggregates(DEV)
                 .build()
             .httpAPI("/api", app)
