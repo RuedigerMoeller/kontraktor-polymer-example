@@ -20,9 +20,9 @@
   <link rel="import" href="flip-clock/flip-clock.html">
   <link rel="import" href="google-chart/google-chart.html">
 
-  <!-- load my polymer components-->
-  <link rel="import" href="app/my-comp.dom.html">
-  <link rel="import" href="app/x-foo.dom.html">
+  <!-- app specific polymer components-->
+  <link rel="import" href="app/my-layout.html">
+  <link rel="import" href="app/x-foo.html">
 
   <script src="js4k/js4k.js"></script>
   <script src="app/app.js"></script>
@@ -32,11 +32,17 @@
 
 <body>
 
-<flip-clock></flip-clock>
+<my-layout>
 
-      <my-comp></my-comp>
-      <x-foo></x-foo>
-      <my-comp user="POKPOK"></my-comp>
+  <div class="my-menu">
+    <flip-clock></flip-clock>
+  </div>
+
+  <div class="my-left">
+    <x-foo></x-foo>
+  </div>
+
+  <div class="my-main">
       <marked-element>
 
       <script type="text/markdown">
@@ -52,6 +58,7 @@
 
       </marked-element>
 
+
       <br><br>
 
       <paper-slider min="10" max="200" value="110" pin="true" style="width: 500px;"></paper-slider>
@@ -63,6 +70,10 @@
         cols='[{"label":"Month", "type":"string"}, {"label":"Days", "type":"number"}]'
         rows='[["Jan", 31],["Feb", 28],["Mar", 31]]'>
       </google-chart>
+
+    </div>
+
+</my-layout>
 
 </body>
 </html>

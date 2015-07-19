@@ -1,0 +1,30 @@
+<!-- my common polymer components-->
+<link rel="import" href="../skeleton/skeleton.html">
+
+<dom-module id="my-layout">
+
+  <template>
+    <div class="container">
+      <div class="row">
+        <div class="twelve columns">
+          <content select=".my-menu"></content>
+        </div>
+      </div>
+      <div class="row">
+        <div class="two columns">
+          <content select=".my-left"></content>
+        </div>
+        <div class="ten columns">
+          <content select=".my-main"></content>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'my-layout'
+    });
+  </script>
+
+</dom-module>

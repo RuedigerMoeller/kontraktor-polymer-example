@@ -26,7 +26,7 @@ public class PolymerAppMain {
         // create server actor
         PolymerApp app = AsActor(PolymerApp.class);
 
-        boolean DEV = false;
+        boolean DEV = true;
         Http4K.Build("localhost", 8080)
 //            .fileRoot( "/", root)
             .resourcePath("/")
