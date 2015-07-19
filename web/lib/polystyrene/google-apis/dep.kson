@@ -1,3 +1,0 @@
-{
-  depends: [ google-client-loader google-legacy-loader google-maps-api google-plusone-api google-realtime-api google-youtube-api ]
-}

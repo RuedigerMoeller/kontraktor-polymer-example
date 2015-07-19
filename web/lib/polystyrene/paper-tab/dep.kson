@@ -1,3 +1,0 @@
-{
-  depends: [ polymer iron-flex-layout iron-flex-layout iron-control-state paper-ripple ]
-}

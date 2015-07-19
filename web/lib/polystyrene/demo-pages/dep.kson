@@ -1,3 +1,0 @@
-{
-  depends: [ polymer iron-flex-layout color typography shadow ]
-}

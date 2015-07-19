@@ -1,3 +1,0 @@
-{
-  depends: [ polymer iron-input iron-form-element-behavior paper-input-behavior paper-input-container paper-input-error paper-input-char-counter ]
-}

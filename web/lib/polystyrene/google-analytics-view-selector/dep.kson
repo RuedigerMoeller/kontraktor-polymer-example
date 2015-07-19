@@ -1,3 +1,0 @@
-{
-  depends: [ polymer account-summaries-import google-analytics-loader ]
-}

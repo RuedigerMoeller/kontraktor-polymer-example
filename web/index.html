@@ -13,22 +13,26 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!--<script src="lookup/webcomponentsjs/webcomponents.js"></script>-->
+  <script src="webcomponentsjs/webcomponents-lite.js"></script>
 
   <link rel="import" href="paper-slider/paper-slider.html">
   <link rel="import" href="marked-element/marked-element.html">
 
-  <!-- load all scripts vis http4k dependency management -->
-  <script src="js"></script>
+  <!-- load my polymer components-->
+  <link rel="import" href="app/my-comp.dom.html">
+  <link rel="import" href="app/x-foo.dom.html">
 
-  <!-- load my polymer components vis http4k dependency management -->
-  <link rel="import" href="merged/.dom.html">
+  <script src="js4k/js4k.js"></script>
+
+  <script src="app/app.js"></script>
+
 
 </head>
 
 <body>
 
 <marked-element>
+
 <script type="text/markdown">
 #This is
 
@@ -38,8 +42,8 @@ some markdown
 * second
 
 Seems to **work** *well*
-
 </script>
+
 </marked-element>
 
 <br><br>

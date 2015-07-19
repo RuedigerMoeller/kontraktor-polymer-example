@@ -1,3 +1,0 @@
-{
-  depends: [ polymer iron-fit-behavior iron-resizable-behavior iron-overlay-backdrop iron-overlay-manager ]
-}

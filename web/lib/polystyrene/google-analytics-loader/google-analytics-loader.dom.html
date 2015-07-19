@@ -1,6 +1,0 @@
-<dom-module id="google-analytics-loader"> 
- <template> 
-  <google-client-loader id="api" name="analytics" version="v3" on-google-api-load="handleApiLoad" on-google-api-load-error="handleApiFailedToLoad"></google-client-loader> 
-  <google-signin-aware scopes="https://www.googleapis.com/auth/analytics.readonly" on-google-signin-aware-success="handleAuthSuccess" on-google-signin-aware-signed-out="handleAuthSignout"></google-signin-aware> 
- </template> 
-</dom-module>

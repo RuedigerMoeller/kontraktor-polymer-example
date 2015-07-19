@@ -1,3 +1,0 @@
-{
-  depends: [ polymer google-maps-api iron-resizable-behavior google-map-marker ]
-}

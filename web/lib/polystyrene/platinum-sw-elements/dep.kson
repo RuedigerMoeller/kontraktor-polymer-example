@@ -1,3 +1,0 @@
-{
-  depends: [ platinum-sw-cache platinum-sw-fetch platinum-sw-import-script platinum-sw-register ]
-}

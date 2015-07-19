@@ -1,3 +1,0 @@
-{
-  depends: [ paper-input paper-textarea ]
-}

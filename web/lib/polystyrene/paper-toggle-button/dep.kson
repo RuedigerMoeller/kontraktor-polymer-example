@@ -1,3 +1,0 @@
-{
-  depends: [ polymer color default-theme paper-ripple paper-inky-focus-behavior ]
-}

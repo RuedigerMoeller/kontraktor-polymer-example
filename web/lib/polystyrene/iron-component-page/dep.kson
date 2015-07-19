@@ -1,3 +1,0 @@
-{
-  depends: [ polymer hydrolysis-analyzer iron-doc-viewer iron-icons iron-ajax iron-selector paper-header-panel paper-toolbar paper-styles ]
-}

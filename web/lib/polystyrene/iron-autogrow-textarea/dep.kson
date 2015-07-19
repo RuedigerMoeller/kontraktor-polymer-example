@@ -1,3 +1,0 @@
-{
-  depends: [ polymer iron-control-state iron-flex-layout iron-validatable-behavior iron-form-element-behavior ]
-}

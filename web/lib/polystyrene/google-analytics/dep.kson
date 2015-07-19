@@ -1,3 +1,0 @@
-{
-  depends: [ google-analytics-query google-analytics-chart google-analytics-view-selector google-analytics-date-selector google-analytics-dashboard ]
-}

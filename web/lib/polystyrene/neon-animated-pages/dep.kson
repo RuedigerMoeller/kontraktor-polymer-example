@@ -1,3 +1,0 @@
-{
-  depends: [ polymer iron-resizable-behavior iron-selectable neon-animation-runner-behavior opaque-animation ]
-}

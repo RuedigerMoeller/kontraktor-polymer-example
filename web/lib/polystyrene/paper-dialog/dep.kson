@@ -1,3 +1,0 @@
-{
-  depends: [ polymer neon-animation-runner-behavior paper-dialog-behavior paper-styles ]
-}

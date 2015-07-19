@@ -1,3 +1,0 @@
-{
-  depends: [ polymer iron-localstorage google-youtube-api ]
-}

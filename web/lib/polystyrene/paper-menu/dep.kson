@@ -1,3 +1,0 @@
-{
-  depends: [ polymer iron-menu-behavior paper-styles ]
-}

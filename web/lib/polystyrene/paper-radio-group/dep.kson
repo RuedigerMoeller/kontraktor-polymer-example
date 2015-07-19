@@ -1,3 +1,0 @@
-{
-  depends: [ polymer iron-selectable paper-radio-button iron-a11y-keys-behavior ]
-}

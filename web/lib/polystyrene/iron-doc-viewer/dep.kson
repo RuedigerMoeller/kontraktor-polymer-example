@@ -1,3 +1,0 @@
-{
-  depends: [ marked-element paper-styles paper-button polymer prism-highlighter iron-doc-property ]
-}

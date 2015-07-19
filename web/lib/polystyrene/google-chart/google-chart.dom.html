@@ -1,8 +1,0 @@
-<dom-module id="google-chart"> 
- <link rel="import" type="css" href="google-chart.css"> 
- <template> 
-  <iron-ajax id="ajax" handle-as="json" url="{{data}}" on-response="_externalDataLoaded"></iron-ajax> 
-  <div id="chartdiv"></div> 
-  <google-legacy-loader on-api-load="_readyForAction"></google-legacy-loader> 
- </template> 
-</dom-module>

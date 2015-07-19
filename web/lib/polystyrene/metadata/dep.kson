@@ -1,3 +1,0 @@
-{
-  depends: [ google-map google-map-directions google-map-search ]
-}

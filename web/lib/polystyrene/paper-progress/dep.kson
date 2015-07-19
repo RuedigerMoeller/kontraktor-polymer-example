@@ -1,3 +1,0 @@
-{
-  depends: [ polymer paper-styles iron-range-behavior iron-flex-layout ]
-}

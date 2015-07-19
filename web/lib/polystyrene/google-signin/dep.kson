@@ -1,3 +1,0 @@
-{
-  depends: [ polymer google-signin-aware iron-icon iron-icons roboto google-js-api paper-ripple paper-material iron-flex-layout google-icons ]
-}
