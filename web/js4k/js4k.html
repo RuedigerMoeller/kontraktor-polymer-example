@@ -1,0 +1,86 @@
+
+<link rel="import" href="../paper-input/paper-input.html">
+
+<script src="js4k.js"></script>
+
+<dom-module id="kr-login">
+
+  <template>
+    <div class="container">
+      <div class="row">
+        <div class="six columns u-full-width" style="margin-top: 12px; margin-bottom: 8px;">
+          <b style="font-size: 1.6em;">Sign in</b>
+        </div>
+      </div>
+      <div class="row">
+        <div class="twelve columns u-full-width">
+          <paper-input class="u-full-width" label="name" bind-value="{{user}}"></paper-input>
+        </div>
+      </div>
+      <div class="row">
+        <div class="twelve columns u-full-width">
+          <paper-input class="u-full-width" label="password" type="password" bind-value="{{pwd}}"></paper-input>
+        </div>
+      </div>
+      <div class="row">
+        <div class="six columns u-full-width">
+          &nbsp;
+        </div>
+        <div class="six columns" style="margin-top: 40px; margin-bottom: 32px;">
+          <button class="button-primary u-pull-right" id="login" on-click="handleClick">Connect</button>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'kr-login',
+
+      properties: {
+          user: { type: String, notify: true },
+          pwd:  { type: String, notify: true }
+      },
+
+      observers: [ 'updateUser(user)', 'updatePwd(pwd)' ],
+
+      updateUser: function(user) {
+        console.log("user "+user);
+      },
+
+      updatePwd: function(pwd) {
+        console.log("pwd "+pwd);
+      },
+
+      attributeChanged: function(name, type) {
+        console.log(this.localName + '#' + this.id + ' attribute ' + name + ' was changed to ' + this.getAttribute(name));
+      },
+
+      handleClick: function( ev ) {
+        console.log("event:"+ev+" user:"+this.user+" pwd:"+this.pwd);
+        var errCB = function (err) {
+          console.log(err);
+        };
+
+        var elemThis = this;
+        var location = "ws://" + window.location.host + "/ws";
+        location = location.replace("//ws", "/ws");
+
+        jsk.connect(location, "WS", errCB)
+          .then( function(server, err) {
+            if ( err ) {
+              console.log("error "+err);
+            } else {
+              console.log("connected "+server);
+              server.ask( "login", elemThis.user, elemThis.pwd )
+                .then( function( session, err ) {
+                  console.log("login result: "+session+" "+err);
+                })
+            }
+          })
+      }
+
+    });
+  </script>
+
+</dom-module>

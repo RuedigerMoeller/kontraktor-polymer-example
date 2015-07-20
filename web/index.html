@@ -15,65 +15,38 @@
 
   <script src="webcomponentsjs/webcomponents-lite.js"></script>
 
-  <link rel="import" href="paper-slider/paper-slider.html">
-  <link rel="import" href="marked-element/marked-element.html">
-  <link rel="import" href="flip-clock/flip-clock.html">
-  <link rel="import" href="google-chart/google-chart.html">
-
   <!-- app specific polymer components-->
+  <link rel="import" href="js4k/js4k.html">
   <link rel="import" href="app/my-layout.html">
-  <link rel="import" href="app/x-foo.html">
 
-  <script src="js4k/js4k.js"></script>
   <script src="app/app.js"></script>
-
 
 </head>
 
 <body>
 
-<my-layout>
-
-  <div class="my-menu">
-    <flip-clock></flip-clock>
-  </div>
-
-  <div class="my-left">
-    <x-foo></x-foo>
-  </div>
-
-  <div class="my-main">
-      <marked-element>
-
-      <script type="text/markdown">
-      #This is
-
-      some markdown
-
-      * first
-      * second
-
-      Seems to **work** *well*
-      </script>
-
-      </marked-element>
+<div style="background: navajowhite; width: 400px; margin:0 auto; margin-top: 50px;">
+<kr-login></kr-login>
+</div>
 
 
-      <br><br>
+<!--<my-layout>-->
 
-      <paper-slider min="10" max="200" value="110" pin="true" style="width: 500px;"></paper-slider>
+  <!--<div class="my-menu">-->
+          <!--&nbsp;-->
+  <!--</div>-->
 
+  <!--<div class="my-left" style="background: lightblue;">-->
+  <!--</div>-->
 
-      <google-chart
-        type='pie'
-        options='{"title": "Distribution of days in 2001Q1"}'
-        cols='[{"label":"Month", "type":"string"}, {"label":"Days", "type":"number"}]'
-        rows='[["Jan", 31],["Feb", 28],["Mar", 31]]'>
-      </google-chart>
+  <!--<div class="my-right" style="background: navajowhite;">-->
+  <!--</div>-->
 
-    </div>
+  <!--<div class="my-main" style="background: navajowhite;">-->
+    <!--<kr-login></kr-login>-->
+  <!--</div>-->
 
-</my-layout>
+<!--</my-layout>-->
 
 </body>
 </html>

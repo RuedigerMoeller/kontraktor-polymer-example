@@ -26,7 +26,7 @@ public class PolymerAppMain {
         // create server actor
         PolymerApp app = AsActor(PolymerApp.class);
 
-        boolean DEV = true;
+        boolean DEV = false;
         Http4K.Build("localhost", 8080)
 //            .fileRoot( "/", root)
             .resourcePath("/")
@@ -40,7 +40,7 @@ public class PolymerAppMain {
                 .minify(!DEV)
                 .stripComments(!DEV)
                 .inlineHtml(!DEV)
-                .cacheAggregates(DEV)
+                .cacheAggregates(false && DEV)
                 .build()
             .httpAPI("/api", app)
             .serType(SerializerType.JsonNoRef)
