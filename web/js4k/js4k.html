@@ -1,36 +1,42 @@
 
 <link rel="import" href="../paper-input/paper-input.html">
+<link rel="import" href="../iron-overlay-behavior/iron-overlay-backdrop.html">
+<!--<link rel="import" href="../iron-collapse/iron-collapse.html">-->
 
 <script src="js4k.js"></script>
 
 <dom-module id="kr-login">
 
   <template>
-    <div class="container">
-      <div class="row">
-        <div class="six columns u-full-width" style="margin-top: 12px; margin-bottom: 8px;">
-          <b style="font-size: 1.6em;">Sign in</b>
+    <!--<iron-collapse opened="true" id="collapse">-->
+    <iron-overlay-backdrop id="overlay" style="transition: opacity .5s ease-in-out;">
+      <div class="container" style="background: whitesmoke; padding: 32px; width: 400px;">
+        <div class="row">
+          <div class="six columns u-full-width" style="margin-top: 1px; margin-bottom: 8px;">
+            <b style="font-size: 1.6em;">Sign in</b>
+          </div>
+        </div>
+        <div class="row">
+          <div class="twelve columns u-full-width">
+            <paper-input class="u-full-width" label="name" bind-value="{{user}}"></paper-input>
+          </div>
+        </div>
+        <div class="row">
+          <div class="twelve columns u-full-width">
+            <paper-input class="u-full-width" label="password" type="password" bind-value="{{pwd}}"></paper-input>
+          </div>
+        </div>
+        <div class="row">
+          <div class="six columns u-full-width">
+            &nbsp;
+          </div>
+          <div class="six columns" style="margin-top: 40px; margin-bottom: 2px;">
+            <button class="button-primary u-pull-right" id="login" on-click="handleClick">Connect</button>
+          </div>
         </div>
       </div>
-      <div class="row">
-        <div class="twelve columns u-full-width">
-          <paper-input class="u-full-width" label="name" bind-value="{{user}}"></paper-input>
-        </div>
-      </div>
-      <div class="row">
-        <div class="twelve columns u-full-width">
-          <paper-input class="u-full-width" label="password" type="password" bind-value="{{pwd}}"></paper-input>
-        </div>
-      </div>
-      <div class="row">
-        <div class="six columns u-full-width">
-          &nbsp;
-        </div>
-        <div class="six columns" style="margin-top: 40px; margin-bottom: 32px;">
-          <button class="button-primary u-pull-right" id="login" on-click="handleClick">Connect</button>
-        </div>
-      </div>
-    </div>
+    </iron-overlay-backdrop>
+    <!--</iron-collapse>-->
   </template>
 
   <script>
@@ -43,6 +49,10 @@
       },
 
       observers: [ 'updateUser(user)', 'updatePwd(pwd)' ],
+
+      ready: function() {
+        this.$.overlay.open();
+      },
 
       updateUser: function(user) {
         console.log("user "+user);
@@ -75,6 +85,9 @@
               server.ask( "login", elemThis.user, elemThis.pwd )
                 .then( function( session, err ) {
                   console.log("login result: "+session+" "+err);
+                  if ( session )
+                    elemThis.$.overlay.close();
+//                    elemThis.$.collapse.toggle();
                 })
             }
           })
