@@ -1,0 +1,74 @@
+
+<link rel="import" href="../polymer/polymer.html">
+<script src="d3.js"></script>
+<script src="d3.layout.cloud.js"></script>
+
+<dom-module id="d3-cloud">
+
+  <template>
+    <div id="cloud">
+    </div>
+    <div style="display: none;">
+      <content id="cont"></content>
+    </div>
+  </template>
+
+  <script>
+    var fill = d3.scale.category20();
+
+    Polymer({
+      is: 'd3-cloud',
+
+      properties: {
+        text: { type: String, notify: true },
+        width: { type: Number, notify: true },
+        height: { type: Number, notify: true }
+      },
+
+      created: function() {
+//        this.settings = {
+//          width: 500, height: 500
+//        };
+      },
+
+      attached: function() {
+        var elemThis = this;
+        this.width = elemThis.width || 500;
+        this.height = elemThis.height || 500;
+        this.text = this.text || "This is the default text is the";
+        function draw(words) {
+          d3.select(elemThis.$.cloud).append("svg")
+              .attr("width", elemThis.width)
+              .attr("height", elemThis.height)
+            .append("g")
+              .attr("transform", "translate(" + layout.size()[0] / 2 + "," + layout.size()[1] / 2 + ")")
+            .selectAll("text")
+              .data(words)
+            .enter().append("text")
+              .style("font-size", function(d) { return d.size + "px"; })
+              .style("font-family", "Impact")
+              .style("fill", function(d, i) { return fill(i); })
+              .attr("text-anchor", "middle")
+              .attr("transform", function(d) {
+                return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+              })
+              .text(function(d) { return d.text; });
+        }
+
+        var layout = d3.layout.cloud()
+          .size([elemThis.width, elemThis.height])
+          .words(elemThis.text.split(" ").map(function(d) {
+            return {text: d, size: 10 + Math.random() * 90, test: "haha"};
+          }))
+          .padding(5)
+          .rotate(function() { return ~~(Math.random() * 2) * 90; })
+          .font("Impact")
+          .fontSize(function(d) { return d.size; })
+          .on("end", draw);
+
+        layout.start();
+      }
+    });
+  </script>
+
+</dom-module>

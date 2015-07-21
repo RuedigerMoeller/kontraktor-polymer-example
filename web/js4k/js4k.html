@@ -1,7 +1,10 @@
 
-<link rel="import" href="../paper-input/paper-input.html">
+<link rel="import" href="../iron-icon/iron-icon.html">
+<link rel="import" href="../iron-icons/iron-icons.html">
 <link rel="import" href="../iron-overlay-behavior/iron-overlay-backdrop.html">
-<!--<link rel="import" href="../iron-collapse/iron-collapse.html">-->
+<link rel="import" href="../paper-input/paper-input.html">
+<link rel="import" href="../paper-button/paper-button.html">
+<link rel="import" href="../paper-toast/paper-toast.html">
 
 <script src="js4k.js"></script>
 
@@ -10,33 +13,27 @@
   <template>
     <!--<iron-collapse opened="true" id="collapse">-->
     <iron-overlay-backdrop id="overlay" style="transition: opacity .5s ease-in-out;">
-      <div class="container" style="background: whitesmoke; padding: 32px; width: 400px;">
-        <div class="row">
-          <div class="six columns u-full-width" style="margin-top: 1px; margin-bottom: 8px;">
-            <b style="font-size: 1.6em;">Sign in</b>
-          </div>
+      <div style="background: whitesmoke; padding: 32px; width: 300px; margin: auto;">
+        <div style="margin-top: 1px; margin-bottom: 8px;">
+          <b style="font-size: 1.6em;">Sign in</b>
         </div>
-        <div class="row">
-          <div class="twelve columns u-full-width">
-            <paper-input class="u-full-width" label="name" bind-value="{{user}}"></paper-input>
-          </div>
+        <div>
+          <paper-input class="u-full-width" label="name" bind-value="{{user}}"></paper-input>
         </div>
-        <div class="row">
-          <div class="twelve columns u-full-width">
-            <paper-input class="u-full-width" label="password" type="password" bind-value="{{pwd}}"></paper-input>
-          </div>
+        <div>
+          <paper-input class="u-full-width" label="password" type="password" bind-value="{{pwd}}"></paper-input>
         </div>
-        <div class="row">
-          <div class="six columns u-full-width">
-            &nbsp;
-          </div>
-          <div class="six columns" style="margin-top: 40px; margin-bottom: 2px;">
-            <button class="button-primary u-pull-right" id="login" on-click="handleClick">Connect</button>
-          </div>
+        <div style="margin-top: 40px; padding-bottom: 40px;">
+          <paper-button raised style="float: right;" id="login" on-click="handleClick">
+            <iron-icon icon="done"></iron-icon>
+            Connect
+          </paper-button>
+        </div>
+        <div>
+          <paper-toast id="toast"></paper-toast>
         </div>
       </div>
     </iron-overlay-backdrop>
-    <!--</iron-collapse>-->
   </template>
 
   <script>
@@ -85,9 +82,14 @@
               server.ask( "login", elemThis.user, elemThis.pwd )
                 .then( function( session, err ) {
                   console.log("login result: "+session+" "+err);
-                  if ( session )
+                  if ( session ) {
                     elemThis.$.overlay.close();
-//                    elemThis.$.collapse.toggle();
+                    elemThis.$.overlay.complete();
+                  }
+                  else {
+                    elemThis.$.toast.text = ""+err;
+                    elemThis.$.toast.show();
+                  }
                 })
             }
           })
