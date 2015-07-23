@@ -3,6 +3,9 @@ package sample.polymer;
 import org.nustaq.kontraktor.*;
 import org.nustaq.kontraktor.annotations.Local;
 import org.nustaq.kontraktor.impl.SimpleScheduler;
+import org.nustaq.kontraktor.util.Log;
+
+import java.util.HashMap;
 
 /**
  * Created by ruedi on 12/07/15.
@@ -14,6 +17,9 @@ public class PolymerApp extends Actor<PolymerApp> {
     Scheduler clientThreads[] = {
         new SimpleScheduler(CLIENT_QSIZE,true) // only one session processor thread should be sufficient for most apps.
     };
+
+    String buzzWords = "";
+    HashMap<PolymerUserSession,Callback> wordSubscriptions = new HashMap<>();
 
     public IPromise<PolymerUserSession> login( String user, String pwd ) {
         Promise result = new Promise<>();
@@ -34,6 +40,35 @@ public class PolymerApp extends Actor<PolymerApp> {
     @Local
     public void clientClosed(PolymerUserSession session) {
         System.out.println("client closed "+session.getUserName().await());
+        wordSubscriptions.remove(session);
     }
 
+    @Local
+    public void subscribe(PolymerUserSession session, Callback<String> cb) {
+        wordSubscriptions.put(session, cb);
+    }
+
+    void fireEvent() {
+        wordSubscriptions.values().forEach( cb -> {
+            try {
+                cb.stream(buzzWords);
+            } catch (Throwable th) {
+                Log.Info(null,th);
+            }
+        });
+    }
+
+    @Local
+    public void addText(String text) {
+        while( buzzWords.length() > 1024 ) {
+            int idx = buzzWords.indexOf(" ");
+            if ( idx <= 0 ) {
+                buzzWords = "";
+            } else {
+                buzzWords = buzzWords.substring(idx);
+            }
+        }
+        buzzWords += " "+text;
+        fireEvent();
+    }
 }

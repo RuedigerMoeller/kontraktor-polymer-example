@@ -1,6 +1,7 @@
 package sample.polymer;
 
 import org.nustaq.kontraktor.Actor;
+import org.nustaq.kontraktor.Callback;
 import org.nustaq.kontraktor.IPromise;
 import org.nustaq.kontraktor.remoting.base.RemotedActor;
 
@@ -22,8 +23,16 @@ public class PolymerUserSession extends Actor<PolymerUserSession> implements Rem
         this.user = user;
     }
 
-
     public IPromise<String> getUserName() {
         return resolve(user);
     }
+
+    public void addText( String text ) {
+        app.addText(text);
+    }
+
+    public void subscribe( Callback<String> cb ) {
+        app.subscribe(self(),cb);
+    }
+
 }

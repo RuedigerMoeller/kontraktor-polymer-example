@@ -1,0 +1,66 @@
+
+<link rel="import" href="../paper-toolbar/paper-toolbar.html">
+<link rel="import" href="../paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../paper-button/paper-button.html">
+<link rel="import" href="../iron-icons/iron-icons.html">
+<link rel="import" href="../paper-button/paper-button.html">
+<link rel="import" href="../paper-input/paper-input.html">
+<link rel="import" href="../d3/d3-cloud.html">
+
+<dom-module id="main-app">
+
+<template>
+
+  <paper-toolbar>
+      <paper-icon-button icon="menu"></paper-icon-button>
+      <span class="title">Polymer App</span>
+      <paper-icon-button icon="refresh"></paper-icon-button>
+      <paper-icon-button icon="add">+</paper-icon-button>
+  </paper-toolbar>
+  <br><br>
+  <div style="width: 600px; margin: 0 auto;">
+
+    <d3-cloud width="600" height="300" text="bla bla blubb blabl bla bla"></d3-cloud>
+
+    <div style="width:300px; margin: 0 auto;">
+      <paper-input id="text" label="Your favourite buzzword"></paper-input>
+      <paper-icon-button icon="send" on-click="sendBuzz"></paper-icon-button>
+    </div>
+  </div>
+
+</template>
+
+<script>
+
+Polymer({
+  is: 'main-app',
+  sendBuzz:  function(event) {
+    var text = this.$.text.value;
+    if ( !text)
+      return;
+    text = text.split(" ");
+    if ( text.length > 0 ) {
+      text = text[0];
+    } else {
+      return;
+    }
+    this.$.text.value = "";
+    APP.session.tell("addText", text);
+  }
+});
+
+window.APP = {
+  onLogin: function() {
+    console.log("LOGGEDIN:"+this.session+" "+this.server);
+    this.session.ask( "subscribe", function(r,e) {
+      console.log("broadcast:"+r);
+    });
+  },
+  onConnect: function() {
+    console.log("CONNECTED:"+this.session+" "+this.server);
+  }
+};
+
+</script>
+
+</dom-module>

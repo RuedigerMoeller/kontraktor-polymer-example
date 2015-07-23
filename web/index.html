@@ -15,18 +15,9 @@
 
   <script src="webcomponentsjs/webcomponents-lite.js"></script>
 
-
-  <link rel="import" href="paper-toolbar/paper-toolbar.html">
-  <link rel="import" href="paper-icon-button/paper-icon-button.html">
-  <link rel="import" href="paper-button/paper-button.html">
-  <link rel="import" href="iron-icons/iron-icons.html">
-  <link rel="import" href="paper-button/paper-button.html">
-  <link rel="import" href="d3/d3-cloud.html">
-
   <!-- app specific polymer components-->
   <link rel="import" href="js4k/js4k.html">
-
-  <script src="app/app.js"></script>
+  <link rel="import" href="app/main-app.html">
 
 </head>
 
@@ -34,37 +25,10 @@
 
 <div>
 
-<paper-toolbar>
-    <paper-icon-button icon="menu"></paper-icon-button>
-    <span class="title">Polymer App</span>
-    <paper-icon-button icon="refresh"></paper-icon-button>
-    <paper-icon-button icon="add">+</paper-icon-button>
-</paper-toolbar>
-
-<d3-cloud width="600" height="300" text="bla bla blubb blabl bla bla"></d3-cloud>
-
-<kr-login></kr-login>
+  <main-app></main-app>
+  <kr-login></kr-login>
 
 </div>
-
-
-<!--<my-layout>-->
-
-  <!--<div class="my-menu">-->
-          <!--&nbsp;-->
-  <!--</div>-->
-
-  <!--<div class="my-left" style="background: lightblue;">-->
-  <!--</div>-->
-
-  <!--<div class="my-right" style="background: navajowhite;">-->
-  <!--</div>-->
-
-  <!--<div class="my-main" style="background: navajowhite;">-->
-    <!--<kr-login></kr-login>-->
-  <!--</div>-->
-
-<!--</my-layout>-->
 
 </body>
 </html>

@@ -10,8 +10,13 @@
 
 <dom-module id="kr-login">
 
+  <style>
+    #overlay {
+      --iron-overlay-backdrop-opacity: 1.0;
+      --iron-overlay-backdrop-background-color: rgba( 0,0,0,.5);
+    }
+  </style>
   <template>
-    <!--<iron-collapse opened="true" id="collapse">-->
     <iron-overlay-backdrop id="overlay" style="transition: opacity .5s ease-in-out;">
       <div style="background: whitesmoke; padding: 32px; width: 300px; margin: auto;">
         <div style="margin-top: 1px; margin-bottom: 8px;">
@@ -79,12 +84,21 @@
               console.log("error "+err);
             } else {
               console.log("connected "+server);
+              var APP = window.APP || {};
+              APP.server = server;
+              if ( APP.onConnect ) {
+                APP.onConnect.call(APP);
+              }
               server.ask( "login", elemThis.user, elemThis.pwd )
                 .then( function( session, err ) {
                   console.log("login result: "+session+" "+err);
                   if ( session ) {
+                    APP.session = session;
                     elemThis.$.overlay.close();
                     elemThis.$.overlay.complete();
+                    if ( APP.onLogin ) {
+                      APP.onLogin.call(APP);
+                    }
                   }
                   else {
                     elemThis.$.toast.text = ""+err;
