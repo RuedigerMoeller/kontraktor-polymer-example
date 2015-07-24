@@ -41,6 +41,6 @@
     "commit": "fd9de3848dd09e9972e9b90fdda9d235d9b67d54"
   },
   "_source": "git://github.com/GoogleWebComponents/google-signin.git",
-  "_target": "^1.0.0",
+  "_target": "^1.0",
   "_originalSource": "GoogleWebComponents/google-signin"
 }
