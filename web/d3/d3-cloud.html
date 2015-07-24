@@ -16,58 +16,104 @@
   <script>
     var fill = d3.scale.category20();
 
+    function occurrences(string, subString, allowOverlapping){
+
+        string+=""; subString+="";
+        if(subString.length<=0) return string.length+1;
+
+        var n=0, pos=0;
+        var step=(allowOverlapping)?(1):(subString.length);
+
+        while(true){
+            pos=string.indexOf(subString,pos);
+            if(pos>=0){ n++; pos+=step; } else break;
+        }
+        return(n);
+    }
+
     Polymer({
       is: 'd3-cloud',
 
       properties: {
-        text: { type: String, notify: true },
+        text: { type: String, notify: true, observer: 'textChanged' },
         width: { type: Number, notify: true },
         height: { type: Number, notify: true }
       },
 
       created: function() {
-//        this.settings = {
-//          width: 500, height: 500
-//        };
+      },
+
+      textChanged: function() {
+        var self = this;
+        if ( self.layout ) {
+
+            var words = [];
+            var count = [];
+            var max = 1;
+            self.text.split(" ").forEach( function(word) {
+              var index = words.indexOf(word);
+              if ( index < 0 ) {
+                words.push(word);
+                count.push(1);
+              } else {
+                count[index]++;
+                max = count[index] > max ? count[index] : max;
+              }
+            });
+            for ( var i=0; i < words.length; i++ ) {
+              words[i] = { text: words[i], size: 10+count[i]*3 };
+            }
+            self.layout.words(words);
+            self.layout.start();
+        }
       },
 
       attached: function() {
-        var elemThis = this;
-        this.width = elemThis.width || 500;
-        this.height = elemThis.height || 500;
+        var self = this;
+        this.width = self.width || 500;
+        this.height = self.height || 500;
         this.text = this.text || "This is the default text is the";
-        function draw(words) {
-          d3.select(elemThis.$.cloud).append("svg")
-              .attr("width", elemThis.width)
-              .attr("height", elemThis.height)
+
+        var svg = d3.select(self.$.cloud).append("svg")
+            .attr("width", self.width)
+            .attr("height", self.height)
             .append("g")
-              .attr("transform", "translate(" + layout.size()[0] / 2 + "," + layout.size()[1] / 2 + ")")
-            .selectAll("text")
-              .data(words)
-            .enter().append("text")
-              .style("font-size", function(d) { return d.size + "px"; })
-              .style("font-family", "Impact")
-              .style("fill", function(d, i) { return fill(i); })
-              .attr("text-anchor", "middle")
+              .attr("transform", "translate(" + this.width / 2 + "," + this.height / 2 + ")");
+
+        function draw(words) {
+          var text = svg
+                    .selectAll("text")
+                      .data(words);
+          text.enter().append("text");
+          text.style("font-size", function(d) { return d.size + "px"; })
+            .style("font-family", "Impact")
+            .style("fill", function(d, i) { return fill(i); })
+            .attr("text-anchor", "middle")
+            .transition()
               .attr("transform", function(d) {
                 return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
               })
-              .text(function(d) { return d.text; });
+              .text(function(d) { return d.text; })
+          ;
+          text.exit().remove();
         }
 
-        var layout = d3.layout.cloud()
-          .size([elemThis.width, elemThis.height])
-          .words(elemThis.text.split(" ").map(function(d) {
-            return {text: d, size: 10 + Math.random() * 90, test: "haha"};
-          }))
+        self.layout = d3.layout.cloud()
+          .size([self.width, self.height])
+          .words(self.text.split(" ").map(function(d) {
+              return {text: d, size: 10 + Math.random() * 90};
+            }))
           .padding(5)
-          .rotate(function() { return ~~(Math.random() * 2) * 90; })
+          .rotate(function(word) {
+            return ~~(word.text.length%2) * 90;
+          })
           .font("Impact")
           .fontSize(function(d) { return d.size; })
           .on("end", draw);
 
-        layout.start();
+        self.layout.start();
       }
+
     });
   </script>
 

@@ -20,11 +20,11 @@
   <br><br>
   <div style="width: 600px; margin: 0 auto;">
 
-    <d3-cloud width="600" height="300" text="bla bla blubb blabl bla bla"></d3-cloud>
+    <d3-cloud id="cloud" width="600" height="300" text="bla bla blubb blabl bla bla"></d3-cloud>
 
-    <div style="width:300px; margin: 0 auto;">
-      <paper-input id="text" label="Your favourite buzzword"></paper-input>
-      <paper-icon-button icon="send" on-click="sendBuzz"></paper-icon-button>
+    <div class="horizontal layout" style="width:300px; margin: 0 auto;">
+      <paper-input class="self-stretch" id="text" label="Your favourite buzzword"></paper-input>
+      <paper-icon-button class="flex self-end" icon="send" on-click="sendBuzz"></paper-icon-button>
     </div>
   </div>
 
@@ -34,6 +34,16 @@
 
 Polymer({
   is: 'main-app',
+
+  self: null,
+
+  ready: function() {
+    self = this;
+    window.APP = window.APP || {};
+    window.APP.onLogin = self.onLogin;
+    window.APP.onConnect = self.onConnect;
+  },
+
   sendBuzz:  function(event) {
     var text = this.$.text.value;
     if ( !text)
@@ -46,20 +56,20 @@ Polymer({
     }
     this.$.text.value = "";
     APP.session.tell("addText", text);
-  }
-});
+  },
 
-window.APP = {
   onLogin: function() {
     console.log("LOGGEDIN:"+this.session+" "+this.server);
     this.session.ask( "subscribe", function(r,e) {
       console.log("broadcast:"+r);
+      self.$.cloud.text=r;
     });
   },
   onConnect: function() {
     console.log("CONNECTED:"+this.session+" "+this.server);
   }
-};
+
+});
 
 </script>
 

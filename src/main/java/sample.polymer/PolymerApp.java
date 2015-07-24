@@ -46,6 +46,7 @@ public class PolymerApp extends Actor<PolymerApp> {
     @Local
     public void subscribe(PolymerUserSession session, Callback<String> cb) {
         wordSubscriptions.put(session, cb);
+        cb.stream(buzzWords);
     }
 
     void fireEvent() {
