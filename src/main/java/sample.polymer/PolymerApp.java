@@ -14,7 +14,7 @@ import java.util.HashMap;
 /**
  * Created by ruedi on 12/07/15.
  *
- * Example for an polymer konntrakor application
+ * Example for a polymer kontraktor application
  *
  * This is the main server facade class. Once a client successfully authenticates
  * via login(), a session instance associated with the client is created.
@@ -86,7 +86,7 @@ public class PolymerApp extends Actor<PolymerApp> {
             if ( idx <= 0 ) {
                 buzzWords = "";
             } else {
-                buzzWords = buzzWords.substring(idx);
+                buzzWords = buzzWords.substring(idx+1);
             }
         }
         buzzWords += " "+text;
@@ -94,8 +94,6 @@ public class PolymerApp extends Actor<PolymerApp> {
     }
 
     public static void main(String[] args) throws IOException {
-        // just setup stuff manually here. Its easy to build an application specific
-        // config using e.g. json or kson.
         File root = new File("./web");
 
         if ( ! new File(root,"index.html").exists() ) {
