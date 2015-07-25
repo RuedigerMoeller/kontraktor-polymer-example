@@ -17,12 +17,11 @@
       <paper-icon-button icon="refresh"></paper-icon-button>
       <paper-icon-button icon="add">+</paper-icon-button>
   </paper-toolbar>
-  <br><br>
-  <div style="width: 600px; margin: 0 auto;">
+  <div class="vertical layout" style="margin: 0 auto;">
 
-    <d3-cloud id="cloud" width="600" height="300" text="bla bla blubb blabl bla bla"></d3-cloud>
+    <d3-cloud class="flex self-center" id="cloud" width="800" height="400" text="bla bla blubb blabl bla bla"></d3-cloud>
 
-    <div class="horizontal layout" style="width:300px; margin: 0 auto;">
+    <div class="self-center horizontal layout" style="width:300px; margin: 0 auto;">
       <paper-input class="self-stretch" id="text" label="Your favourite buzzword"></paper-input>
       <paper-icon-button class="flex self-end" icon="send" on-click="sendBuzz"></paper-icon-button>
     </div>

@@ -61,7 +61,7 @@
               }
             });
             for ( var i=0; i < words.length; i++ ) {
-              words[i] = { text: words[i], size: 10+count[i]*3 };
+              words[i] = { text: words[i], size: 10+~~((count[i]*50)/max) };
             }
             self.layout.words(words);
             self.layout.start();
