@@ -1,0 +1,20 @@
+AppConfig {
+
+  hostName: localhost port: 8080
+
+  devMode: true
+
+  sessionThreads: 1
+  clientQSize: 1_000
+  maxConnections: 10000
+
+  # requires current dir = project root
+  resources: [
+    "./web"
+    "./bower_components/"
+  ]
+
+  # app level
+  initialBuzz: "Kontraktor WebComponents Polymer Undertow"
+
+}

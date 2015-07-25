@@ -7,6 +7,9 @@ import org.nustaq.kontraktor.remoting.base.RemotedActor;
 
 /**
  * Created by ruedi on 13/07/15.
+ *
+ * Instances of this actor are created upon successful authentication per client
+ *
  */
 public class PolymerUserSession extends Actor<PolymerUserSession> implements RemotedActor {
 

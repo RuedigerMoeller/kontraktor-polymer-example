@@ -13,21 +13,33 @@ import java.util.HashMap;
 
 /**
  * Created by ruedi on 12/07/15.
+ *
+ * Example for an polymer konntrakor application
+ *
+ * This is the main server facade class. Once a client successfully authenticates
+ * via login(), a session instance associated with the client is created.
+ *
  */
 public class PolymerApp extends Actor<PolymerApp> {
 
-    public static final int CLIENT_QSIZE = 1000;
-
-    Scheduler clientThreads[] = {
-        new SimpleScheduler(CLIENT_QSIZE,true) // only one session processor thread should be sufficient for most apps.
-    };
-
-    String buzzWords = "Kontraktor WebComponents Polymer Undertow";
+    Scheduler clientThreads[];
+    String buzzWords;
     HashMap<PolymerUserSession,Callback> wordSubscriptions = new HashMap<>();
+    AppConfig conf;
+
+    @Local
+    public void init(AppConfig conf) {
+        this.conf = conf;
+        buzzWords = conf.initialBuzz;
+        clientThreads = new Scheduler[conf.sessionThreads];
+        for (int i = 0; i < clientThreads.length; i++) {
+            clientThreads[i] = new SimpleScheduler(conf.clientQSize,true);
+        }
+    }
 
     public IPromise<PolymerUserSession> login( String user, String pwd ) {
         Promise result = new Promise<>();
-        if (wordSubscriptions.size() > 10_000) {
+        if (wordSubscriptions.size() > conf.maxConnections) {
             result.reject("Too many users. Try later.");
             closeCurrentClient();
         } else
@@ -47,7 +59,7 @@ public class PolymerApp extends Actor<PolymerApp> {
 
     @Local
     public void clientClosed(PolymerUserSession session) {
-        System.out.println("client closed "+session.getUserName().await());
+        Log.Info(this, "client closed " + session.getUserName().await());
         wordSubscriptions.remove(session);
     }
 
@@ -91,22 +103,19 @@ public class PolymerApp extends Actor<PolymerApp> {
             System.exit(-1);
         }
 
-        // create server actor
+        // create server actor + read config
         PolymerApp app = AsActor(PolymerApp.class);
+        AppConfig conf = AppConfig.read();
+        app.init(conf);
 
-        boolean DEV = false;
-        Http4K.Build("localhost", 8080)
+        Http4K.Build(conf.hostName, conf.port)
             .resourcePath("/")
-                .elements(
-                     "./web",
-                     "./bower_components/",
-                     "../kontraktor/modules/kontraktor-http/src/main/javascript"
-                )
-                .allDev(DEV)
-                .cacheAggregates(false) // to debug aggregated
+                .elements( conf.resources )
+                .allDev( conf.devMode )
+//                .cacheAggregates(false) // uncomment to debug aggregated but prod mode
                 .build()
             .httpAPI("/api", app)
-            .serType(SerializerType.JsonNoRef)
+                .serType(SerializerType.JsonNoRef)
                 .setSessionTimeout(30_000)
                 .build()
             .websocket("ws", app)
