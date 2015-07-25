@@ -3,8 +3,12 @@ package sample.polymer;
 import org.nustaq.kontraktor.*;
 import org.nustaq.kontraktor.annotations.Local;
 import org.nustaq.kontraktor.impl.SimpleScheduler;
+import org.nustaq.kontraktor.remoting.encoding.SerializerType;
+import org.nustaq.kontraktor.remoting.http.Http4K;
 import org.nustaq.kontraktor.util.Log;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 
 /**
@@ -18,11 +22,15 @@ public class PolymerApp extends Actor<PolymerApp> {
         new SimpleScheduler(CLIENT_QSIZE,true) // only one session processor thread should be sufficient for most apps.
     };
 
-    String buzzWords = "";
+    String buzzWords = "Kontraktor WebComponents Polymer Undertow";
     HashMap<PolymerUserSession,Callback> wordSubscriptions = new HashMap<>();
 
     public IPromise<PolymerUserSession> login( String user, String pwd ) {
         Promise result = new Promise<>();
+        if (wordSubscriptions.size() > 10_000) {
+            result.reject("Too many users. Try later.");
+            closeCurrentClient();
+        } else
         if ( "admin".equals(user) ) {
             // deny access for admin's
             result.reject("Access denied");
@@ -72,4 +80,39 @@ public class PolymerApp extends Actor<PolymerApp> {
         buzzWords += " "+text;
         fireEvent();
     }
+
+    public static void main(String[] args) throws IOException {
+        // just setup stuff manually here. Its easy to build an application specific
+        // config using e.g. json or kson.
+        File root = new File("./web");
+
+        if ( ! new File(root,"index.html").exists() ) {
+            System.out.println("Please run with working dir: '[..]/polystrene");
+            System.exit(-1);
+        }
+
+        // create server actor
+        PolymerApp app = AsActor(PolymerApp.class);
+
+        boolean DEV = false;
+        Http4K.Build("localhost", 8080)
+            .resourcePath("/")
+                .elements(
+                     "./web",
+                     "./bower_components/",
+                     "../kontraktor/modules/kontraktor-http/src/main/javascript"
+                )
+                .allDev(DEV)
+                .cacheAggregates(false) // to debug aggregated
+                .build()
+            .httpAPI("/api", app)
+            .serType(SerializerType.JsonNoRef)
+                .setSessionTimeout(30_000)
+                .build()
+            .websocket("ws", app)
+                .serType(SerializerType.JsonNoRef)
+                .build()
+            .build();
+    }
+
 }

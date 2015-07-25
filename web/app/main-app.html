@@ -14,18 +14,21 @@
   <paper-toolbar>
       <paper-icon-button icon="menu"></paper-icon-button>
       <span class="title">Polymer Buzz App</span>
-      <paper-icon-button icon="refresh"></paper-icon-button>
-      <paper-icon-button icon="add">+</paper-icon-button>
+      <!--<paper-icon-button icon="refresh"></paper-icon-button>-->
+      <!--<paper-icon-button icon="add">+</paper-icon-button>-->
   </paper-toolbar>
   <div class="vertical layout" style="margin: 0 auto;">
-
     <d3-cloud class="flex self-center" id="cloud" width="800" height="400" text="bla bla blubb blabl bla bla"></d3-cloud>
 
     <div class="self-center horizontal layout" style="width:300px; margin: 0 auto;">
       <paper-input class="self-stretch" id="text" label="Your favourite buzzword"></paper-input>
       <paper-icon-button class="flex self-end" icon="send" on-click="sendBuzz"></paper-icon-button>
     </div>
+    <br><br>
+    <!-- test link correction when aggregating -->
+    <img class="self-center" hidden src="wcorg-logo.jpg">
   </div>
+
 
 </template>
 
