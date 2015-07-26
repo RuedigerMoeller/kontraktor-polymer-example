@@ -2,7 +2,7 @@ AppConfig {
 
   hostName: localhost port: 8080
 
-  devMode: true
+  devMode: false
 
   sessionThreads: 1
   clientQSize: 1_000
