@@ -8,4 +8,4 @@ sample application showing how to
 - websocket communication of js <=> kontraktor, server push
 - create an application specific kson config file
 
-the app computes a word cloud from buzzwords typed in. The more often a buzzword has been typed, the larger the word is rendered (realtime).
+the app computes a word cloud from buzzwords typed in. The more often a buzzword has been typed, the larger the word is rendered (realtime, distributed across all users).
