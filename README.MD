@@ -1,4 +1,6 @@
-Demo: http://46.4.83.116/polymer/ (just sign in with anything except 'admin')
+Demo: http://46.4.83.116/polymer/ (just sign in with anything except 'admin'), try multiple instances, they interact
+
+blogpost: http://java-is-the-new-c.blogspot.de/2015/07/polymer-webcomponents-served-with-java.html
 
 sample application showing how to
 - make use of kontraktor-http server side html-import polyfill (reduces number of http requests drastically)
