@@ -1,4 +1,4 @@
-[note: requires not yet released version of kontraktor]
+Demo: http://46.4.83.116/polymer/ (just sign in with anything except 'admin')
 
 sample application showing how to
 - make use of kontraktor-http server side html-import polyfill (reduces number of http requests drastically)
