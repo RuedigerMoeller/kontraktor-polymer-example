@@ -1,6 +1,7 @@
 AppConfig {
 
-  hostName: localhost port: 8080
+  urlRoot: "/"
+  hostName: twen port: 8080
 
   devMode: true
 

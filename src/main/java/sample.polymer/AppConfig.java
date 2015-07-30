@@ -12,6 +12,7 @@ import java.io.File;
  */
 public class AppConfig {
 
+
     public static AppConfig read() {
         try {
             return (AppConfig) new Kson().map(AppConfig.class).readObject(new File("app.kson"));
@@ -29,6 +30,7 @@ public class AppConfig {
 
     // initial values are defaults ..
 
+    public String urlRoot = "/";
     public boolean devMode = false;
     public int sessionThreads = 1;
     public int clientQSize = 1000;

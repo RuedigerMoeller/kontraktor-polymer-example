@@ -63,6 +63,10 @@ public class PolymerApp extends Actor<PolymerApp> {
         wordSubscriptions.remove(session);
     }
 
+    public IPromise<Integer> getNumSessions() {
+        return resolve(wordSubscriptions.size());
+    }
+
     @Local
     public void subscribe(PolymerUserSession session, Callback<String> cb) {
         wordSubscriptions.put(session, cb);
@@ -70,17 +74,31 @@ public class PolymerApp extends Actor<PolymerApp> {
     }
 
     void fireEvent() {
-        wordSubscriptions.values().forEach( cb -> {
+        wordSubscriptions.values().forEach(cb -> {
             try {
                 cb.stream(buzzWords);
             } catch (Throwable th) {
-                Log.Info(null,th);
+                Log.Info(null, th);
             }
         });
     }
 
     @Local
     public void addText(String text) {
+        if ( text == null || text.length() > 30 ) {
+            return;
+        }
+        // some competitive replacing =) ..
+        String lowered = text.toLowerCase();
+        if ( lowered.indexOf("scala") >= 0 ) {
+            text = lowered.replace("scala","Java");
+        }
+        if ( lowered.indexOf("akka") >= 0 ) {
+            text = lowered.replace("akka","Kontraktor");
+        }
+        if ( lowered.indexOf("quasar") >= 0 ) {
+            text = lowered.replace("quasar","Kontraktor");
+        }
         while( buzzWords.length() > 1024 ) {
             int idx = buzzWords.indexOf(" ");
             if ( idx <= 0 ) {
@@ -107,7 +125,7 @@ public class PolymerApp extends Actor<PolymerApp> {
         app.init(conf);
 
         Http4K.Build(conf.hostName, conf.port)
-            .resourcePath("/")
+            .resourcePath(conf.urlRoot)
                 .elements( conf.resources )
                 .allDev( conf.devMode )
 //                .cacheAggregates(false) // uncomment to debug aggregated but prod mode
