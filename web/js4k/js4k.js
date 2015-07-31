@@ -18,6 +18,8 @@
 // JavaScript to Kontraktor bridge
 // matches kontraktor 3.0 json-no-ref encoded remoting
 // as I am kind of a JS beginner, hints are welcome :)
+if ( ! window )
+  window = {}; // node
 window.jsk = window.jsk || (function () {
 
   var futureMap = {}; // future id => promise
@@ -634,5 +636,5 @@ window.jsk = window.jsk || (function () {
   return _jsk;
 }());
 
-if ( module )
-  module.exports = jsk;
+if ( module && module.exports )
+  module.exports = window.jsk;
