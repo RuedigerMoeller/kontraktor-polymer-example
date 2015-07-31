@@ -633,3 +633,6 @@ window.jsk = window.jsk || (function () {
 
   return _jsk;
 }());
+
+if ( module )
+  module.exports = jsk;
