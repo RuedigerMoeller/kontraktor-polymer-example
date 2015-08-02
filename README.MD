@@ -1,3 +1,5 @@
+** also has an mostly up-to-date copy of polymer 1.x elements (no bower required) **
+
 Demo: http://46.4.83.116/polymer/ (just sign in with anything except 'admin'), try multiple instances, they interact
 
 blogpost: http://java-is-the-new-c.blogspot.de/2015/07/polymer-webcomponents-served-with-java.html
