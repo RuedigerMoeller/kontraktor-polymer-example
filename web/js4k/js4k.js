@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-// version 3.5.4
+// version 3.6.0
 // JavaScript to Kontraktor bridge
 // matches kontraktor 3.0 json-no-ref encoded remoting
 // as I am kind of a JS beginner, hints are welcome :)
@@ -36,11 +36,20 @@ window.jsk = window.jsk || (function () {
   // fst-Json Helpers
 
   /**
-   * create wrapper object to make given list a valid fst-json Java array
+   * create wrapper object to make given list a valid fst-json Java array (non-primitive)
+   *
+   * @param type - 'array' for object array, else type of java array
+   * @param list - list of properly structured (for java) objects
    */
   jsk.prototype.buildJArray = function( type, list ) {
     list.splice( 0, 0, list.length ); // insert number of elements at 0
     return { styp: type, seq: list };
+  };
+  jsk.prototype.jarray = jsk.prototype.buildJArray;
+
+  // shorthand for object array
+  jsk.prototype.oa = function( jsArr ) {
+    return _jsk.jarray("array",jsArr);
   };
 
   /**
@@ -55,6 +64,7 @@ window.jsk = window.jsk || (function () {
     list.splice( 0, 0, list.length ); // insert number of elements at 0
     return { typ: type, obj: list };
   };
+  jsk.prototype.jcoll = jsk.prototype.buildJColl;
 
   /**
    * builds a java hashmap from array like '[ key, val, key, val ]'
@@ -66,6 +76,7 @@ window.jsk = window.jsk || (function () {
     list.splice( 0, 0, list.length/2 ); // insert number of elements at 0
     return { typ: type, obj: list };
   };
+  jsk.prototype.jmap = jsk.prototype.buildJMap;
 
   /**
    * create wrapper object to make given list a valid fst-json Java Object for sending
@@ -73,6 +84,7 @@ window.jsk = window.jsk || (function () {
   jsk.prototype.buildJObject = function( type, obj ) {
     return { typ: type, obj: obj }
   };
+  jsk.prototype.jobj = jsk.prototype.buildJObject;
 
   /**
    * makes a fst json serialized object more js-friendly
@@ -99,7 +111,7 @@ window.jsk = window.jsk || (function () {
       return arr;
     }
     if (obj["typ"] && obj["obj"]) {
-      if ('list' === obj['typ']) {
+      if ('list' === obj['typ'] || 'map' === obj['typ'] ) {
         // remove leading element length from arraylist
         obj["obj"].shift();
       }
