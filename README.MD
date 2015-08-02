@@ -1,4 +1,4 @@
-** also has an mostly up-to-date copy of polymer 1.x elements (no bower required) **
+**also contains an up-to-date copy of polymer 1.x elements (no bower required)**
 
 Demo: http://46.4.83.116/polymer/ (just sign in with anything except 'admin'), try multiple instances, they interact
 
