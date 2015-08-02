@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-// version 3.05
+// version 3.5.4
 // JavaScript to Kontraktor bridge
 // matches kontraktor 3.0 json-no-ref encoded remoting
 // as I am kind of a JS beginner, hints are welcome :)
-if ( ! window )
+if ( typeof window === 'undefined')
   window = {}; // node
 window.jsk = window.jsk || (function () {
 
@@ -417,7 +417,15 @@ window.jsk = window.jsk || (function () {
     self.onmessage = function (eventListener) {
       self.socket.onmessage = function (message) {
         if (typeof message.data == 'string') {
-          eventListener.apply(self, [message]);
+          try {
+            var response = JSON.parse(message.data);
+            processSocketResponse(-1,response, self.automaticTransformResults, eventListener, self);
+          } catch (err) {
+            console.error("unhandled decoding error:" + err);
+            if (self.socket.onerror)
+              self.socket.onerror.apply(self, [err]);
+          }
+//          eventListener.apply(self, [message]);
         } else {
           incomingMessages.push(message.data);
           // in order to parse binary messages, an async file reader must be used.
@@ -453,7 +461,8 @@ window.jsk = window.jsk || (function () {
               else
                 inParse = false;
             };
-            fr.readAsBinaryString(incomingMessages.shift());
+            fr.readAsText(incomingMessages.shift());
+
           }; // end parse function
           if (!inParse) {
             inParse = true;
