@@ -4,6 +4,9 @@ Demo: http://46.4.83.116/polymer/ (just sign in with anything except 'admin'), t
 
 blogpost: http://java-is-the-new-c.blogspot.de/2015/07/polymer-webcomponents-served-with-java.html
 
+see also the polymer starter kit (1.03) adapted to kontraktor:
+https://github.com/RuedigerMoeller/polymer-starter-with-kontraktor
+
 sample application showing how to
 - make use of kontraktor-http server side html-import polyfill (reduces number of http requests drastically)
 - use and organize polymer 1.0x webcomponents with kontraktor's resourcepath
