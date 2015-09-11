@@ -115,7 +115,7 @@ public class PolymerApp extends Actor<PolymerApp> {
         File root = new File("./web");
 
         if ( ! new File(root,"index.html").exists() ) {
-            System.out.println("Please run with working dir: '[..]/polystrene");
+            System.out.println("Please run with working dir: '[projectroot]");
             System.exit(-1);
         }
 
