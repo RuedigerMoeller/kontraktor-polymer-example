@@ -12,7 +12,6 @@ import java.io.File;
  */
 public class AppConfig {
 
-
     public static AppConfig read() {
         try {
             return (AppConfig) new Kson().map(AppConfig.class).readObject(new File("app.kson"));
